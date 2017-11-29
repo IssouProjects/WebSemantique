@@ -10,7 +10,7 @@ app.get('/', function (req, res) {
 app.get('/dbpedia/annotate', function (req, res) {
   console.log(req.query.text)
   dbpedia.annotate(req.query.text, function(error, response, body) {
-    res.set('Content-Type', 'application/json')
+    res.set('Content-Type', 'text/html')
     res.send(body)
   })
 })
