@@ -1,0 +1,25 @@
+{
+  "name": "websemantique",
+  "version": "1.0.0",
+  "description": "",
+  "main": "GoogleAPI.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IssouProjects/WebSemantique.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IssouProjects/WebSemantique/issues"
+  },
+  "homepage": "https://github.com/IssouProjects/WebSemantique#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "request": "^2.83.0"
+  }
+}
