@@ -1,3 +1,7 @@
+# Custom
+package-lock.json
+.vscode/settings.json
+
 # Logs
 logs
 *.log
