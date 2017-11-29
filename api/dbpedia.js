@@ -2,8 +2,9 @@ const request = require('request')
 
 module.exports = {
     spotlight: function(query, callback) {
-        const url = 'http://model.dbpedia-spotlight.org/en/spot'
-    
+        //const url = 'http://model.dbpedia-spotlight.org/en/spot'
+        const url = 'http://model.dbpedia-spotlight.org/en/annotate'
+        
         const parameters = {
             text: query
         }
