@@ -3,6 +3,8 @@ const app = express()
 
 const dbpedia = require('./api/dbpedia.js')
 
+app.set('port', (process.env.PORT || 3000));
+
 app.get('/', express.static(__dirname))
 
 app.get('/dbpedia/annotate', function (req, res) {
@@ -24,6 +26,6 @@ app.get('/dbpedia/spotlight', function (req, res) {
 
 app.use('/assets', express.static('assets'));
 
-app.listen(3000, function () {
-  console.log('App listening on port 3000!')
-})
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
