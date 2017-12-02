@@ -8,8 +8,9 @@ app.get('/', express.static(__dirname))
 app.get('/dbpedia/annotate', function (req, res) {
   console.log(req.query.text)
   dbpedia.annotate(req.query.text, function(error, response, body) {
-    res.set('Content-Type', 'text/html')
-    res.send(body)
+    var retour = new Object({body: body})
+    res.set('Content-Type', 'application/json')
+    res.send(retour)
   })
 })
 
