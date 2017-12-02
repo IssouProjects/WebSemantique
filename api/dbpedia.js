@@ -9,8 +9,10 @@ module.exports = {
         }
     
         request({url: url, qs: parameters}, function (error, response, body) {
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+            if(process.env.ENV_VARIABLE === 'dev') {
+                console.log('error:', error); // Print the error if one occurred
+                console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+            }
             callback(error, response, body)
         });
     },
@@ -23,8 +25,10 @@ module.exports = {
         }
     
         request({url: url, qs: parameters}, function (error, response, body) {
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+            if(process.env.ENV_VARIABLE === 'dev') {
+                console.log('error:', error); // Print the error if one occurred
+                console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+            }
             callback(error, response, body)
         });
     }
