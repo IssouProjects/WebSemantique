@@ -3,6 +3,8 @@ const app = express()
 
 const dbpedia = require('./api/dbpedia.js')
 
+module.exports = app
+
 app.set('port', (process.env.PORT || 3000));
 
 app.get('/', express.static(__dirname))
