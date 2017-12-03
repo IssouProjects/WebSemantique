@@ -30,6 +30,16 @@ app.get('/dbpedia/spotlight', function (req, res) {
   })
 })
 
+app.get('/dbpedia/sparql', function (req, res) {
+  if(process.env.ENV_VARIABLE === 'dev') {
+    console.log(req.query.text)
+  }
+  dbpedia.sparqlRequest(req.query.text, function(error, response, body) {
+    res.set('Content-Type', 'application/json')
+    res.send(body)
+  })
+})
+
 app.use('/assets', express.static('assets'));
 
 app.listen(app.get('port'), function() {
