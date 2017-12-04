@@ -19,7 +19,11 @@ describe('DBpedia', function () {
         .query({text: 'Lyon'})
         .end((err, res) => {
             res.should.have.status(200)
-            res.text.should.be.a('string').that.includes('<a about=\\"http://dbpedia.org/resource/Lyon\\" typeof=\\"http://dbpedia.org/ontology/Settlement\\" href=\\"http://dbpedia.org/resource/Lyon\\" title=\\"http://dbpedia.org/resource/Lyon\\">Lyon</a>')
+            res.should.have.property('body')
+            res.body.body.should.have.property('Resources')
+            res.body.body.Resources.should.be.an('Array')
+            res.body.body.Resources[0].should.have.property('@URI')
+            res.body.body.Resources[0]['@URI'].should.equals('http://dbpedia.org/resource/Lyon')
             done()
         })
     })
