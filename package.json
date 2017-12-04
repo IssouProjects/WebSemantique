@@ -1,0 +1,31 @@
+{
+  "name": "websemantique",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "6.11.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IssouProjects/WebSemantique.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IssouProjects/WebSemantique/issues"
+  },
+  "homepage": "https://github.com/IssouProjects/WebSemantique#readme",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.16.2",
+    "mocha": "^4.0.1",
+    "request": "^2.83.0"
+  }
+}
