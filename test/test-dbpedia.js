@@ -10,6 +10,9 @@ chai.use(chaiHttp);
 process.env.ENV_VARIABLE = 'test'
 
 describe('DBpedia', function () {
+
+    this.timeout(10000)
+
     it('should correctly annotate a text', (done) => {
         chai.request(server)
         .get('/dbpedia/annotate')
