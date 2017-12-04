@@ -32,4 +32,15 @@ describe('DBpedia', function () {
             done()
         })
     })
+
+    it('should correctly respond to a SPARQL request', (done) => {
+        chai.request(server)
+        .get('/dbpedia/sparql')
+        .query({text: 'select distinct ?Concept where {[] a ?Concept} LIMIT 100'})
+        .end((err, res) => {
+            res.should.have.status(200)
+            res.body.should.have.property('results')
+            done()
+        })
+    })
 })
