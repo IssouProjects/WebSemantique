@@ -20,36 +20,34 @@
     <div class="container">
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-3">Issou Games Finder</h1>
+                <h1 class="display-5">Issou Games Finder</h1>
                 <p class="lead">Le moteur de recherche dédié au jeu vidéo.</p>
+                <h2>Rechercher un jeu</h2>
+                <div class="input-group">
+                    <input id="query" type="text" class="form-control" placeholder="Jeu" aria-label="Jeu">
+                    <button id="search" class="btn btn-md btn-primary">Rechercher</button>
+                </div>
             </div>
-        </div>
-        <h1>Annoter du texte</h1>
-        <div class="input-group">
-            <input id="query" type="text" class="form-control" placeholder="Requête" aria-label="Requête">
-            <button id="search" class="btn btn-md btn-primary">Rechercher</button>
         </div>
         <br/>
         <div class="card">
-            <div class="card-body">
-                <span id="annotated"></span>
+            <div class="card-header">
+                <h1><strong>Nom : </strong><span id="name"></span></h1>
             </div>
-        </div>
-
-        <br/>
-
-        <h1>Effectuer une requête SPARQL sur DBPedia</h1>
-        <textarea name="sparql" class="form-control" id="sparql" cols="30" rows="10"></textarea>
-        <button id="runSparql" class="btn btn-md btn-primary">Exécuter</button>
-        <div class="card">
             <div class="card-body">
-                <span id="results"></span>
+                <p>
+                    <strong>Date de sortie:</strong>  <span id="releaseDate"></span><br/>
+                    <strong>Createurs: </strong><span id="creators"></span><br/>
+                    <strong>Genres: </strong><span id="genre"></span><br/>
+                    <strong>Platformes: </strong><span id="platforms"></span><br/>
+                </p>
             </div>
-        </div>
+          </div>
     </div>
 </body>
 
 <script src="assets/spotlight.js"></script>
+<script src="assets/infos.js"></script>
 <script src="assets/sparql-query.js"></script>
 
 </html>
