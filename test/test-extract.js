@@ -7,7 +7,7 @@ let extract = require('../api/extract')
 process.env.ENV_VARIABLE = 'test'
 
 describe('Extract', function() {
-    this.timeout(10000)
+    this.timeout(40000)
 
     it('should correctly give all the URIs with the correct occurences', (done) => {
         extract.results('France', function(occurences) {
