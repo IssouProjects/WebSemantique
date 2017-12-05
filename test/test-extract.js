@@ -13,7 +13,7 @@ describe('Extract', function() {
         extract.results('France', function(occurences) {
             occurences.should.be.a('Map')
             occurences.get("http://dbpedia.org/resource/France").should.be.a('number')
-            occurences.get("http://dbpedia.org/resource/France").should.be.above(13)
+            occurences.get("http://dbpedia.org/resource/France").should.be.above(5)
             done()
         })
     })
