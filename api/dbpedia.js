@@ -42,6 +42,13 @@ module.exports = {
                 console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
             }
+
+            try {
+                body = JSON.parse(body)
+            } catch (e) {
+                // Tant pis
+            }
+
             callback(error, response, body)
         });
     },
@@ -59,6 +66,13 @@ module.exports = {
                 console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
             }
+
+            try {
+                body = JSON.parse(body)
+            } catch (e) {
+                // Tant pis
+            }
+            
             callback(error, response, body)
         })
     }
