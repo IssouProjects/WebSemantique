@@ -32,7 +32,6 @@ module.exports = {
                 var searchOccurences = new Array()
 
                 results.forEach(function(annotation) {
-                    annotation = JSON.parse(annotation)
                     annotation.Resources.forEach(function(resource) {
                         searchOccurences.push(new Promise(function(resolve, reject) {
                             if(occurences.has(resource['@URI'])) {
