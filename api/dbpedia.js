@@ -7,12 +7,17 @@ module.exports = {
         const parameters = {
             text: query
         }
+
+        const headers = {
+            Accept: 'application/json'
+        }
     
-        request({url: url, qs: parameters}, function (error, response, body) {
+        request({headers: headers, url: url, qs: parameters}, function (error, response, body) {
             if(process.env.ENV_VARIABLE === 'dev') {
                 console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
             }
+            body = JSON.parse(body)
             callback(error, response, body)
         });
     },
