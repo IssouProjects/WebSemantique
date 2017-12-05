@@ -1,11 +1,8 @@
 let chai = require('chai');
-let chaiHttp = require('chai-http');
 let should = chai.should();
 let expect = chai.expect();
 
-let server = require('../index.js')
-
-chai.use(chaiHttp);
+let dbpedia = require('../api/dbpedia.js')
 
 process.env.ENV_VARIABLE = 'test'
 
@@ -14,39 +11,34 @@ describe('DBpedia', function () {
     this.timeout(10000)
 
     it('should correctly annotate a text', (done) => {
-        chai.request(server)
-        .get('/dbpedia/annotate')
-        .query({text: 'Lyon'})
-        .end((err, res) => {
-            res.should.have.status(200)
-            res.should.have.property('body')
-            res.body.body.should.have.property('Resources')
-            res.body.body.Resources.should.be.an('Array')
-            res.body.body.Resources[0].should.have.property('@URI')
-            res.body.body.Resources[0]['@URI'].should.equals('http://dbpedia.org/resource/Lyon')
+        dbpedia.annotate('Lyon', function(error, response, body) {
+            body.should.have.property('Resources')
+            body.Resources.should.be.an('Array')
+            body.Resources[0].should.have.property('@URI')
+            body.Resources[0]['@URI'].should.equals('http://dbpedia.org/resource/Lyon')
             done()
         })
     })
 
     it('should correctly spotlight the words', (done) => {
-        chai.request(server)
-        .get('/dbpedia/spotlight')
-        .query({text: 'Lyon'})
-        .end((err, res) => {
-            res.should.have.status(200)
-            res.body.should.have.property('annotation')
-            res.body.annotation.should.have.property('@text')
+        dbpedia.spotlight('Lyon', function(error, response, body) {
+            response.statusCode.should.equals(200)
+            body.should.have.property('annotation')
+            body.annotation.should.have.property('@text')
+            body.annotation['@text'].should.equals('Lyon')
             done()
         })
     })
 
     it('should correctly respond to a SPARQL request', (done) => {
-        chai.request(server)
-        .get('/dbpedia/sparql')
-        .query({text: 'select distinct ?Concept where {[] a ?Concept} LIMIT 100'})
-        .end((err, res) => {
-            res.should.have.status(200)
-            res.body.should.have.property('results')
+        dbpedia.sparqlRequest('select distinct ?Concept where {[] a ?Concept} LIMIT 100', function(error, response, body) {
+            response.statusCode.should.equals(200)
+            body.should.have.property('head')
+            body.should.have.property('results')
+            body.results.bindings.should.be.an('Array')
+            body.results.bindings[0].should.have.property('Concept')
+            body.results.bindings[0].Concept.should.have.property('type')
+            body.results.bindings[0].Concept.should.have.property('value')
             done()
         })
     })
