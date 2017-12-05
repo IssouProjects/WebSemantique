@@ -12,6 +12,8 @@ describe('Extract', function() {
     it('should correctly give all the URIs with the correct occurences', (done) => {
         extract.results('France', function(occurences) {
             occurences.should.be.a('Map')
+            occurences.get("http://dbpedia.org/resource/France").should.be.a('number')
+            occurences.get("http://dbpedia.org/resource/France").should.be.above(13)
             done()
         })
     })
