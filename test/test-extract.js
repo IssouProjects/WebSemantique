@@ -7,13 +7,13 @@ let extract = require('../api/extract')
 process.env.ENV_VARIABLE = 'test'
 
 describe('Extract', function() {
-    this.timeout(40000)
+    this.timeout(10000)
 
     it('should correctly give all the URIs with the correct occurences', (done) => {
         extract.results('France', function(occurences) {
             occurences.should.be.a('Map')
             occurences.get("http://dbpedia.org/resource/France").should.be.a('number')
-            occurences.get("http://dbpedia.org/resource/France").should.be.above(13)
+            occurences.get("http://dbpedia.org/resource/France").should.be.above(5)
             done()
         })
     })
