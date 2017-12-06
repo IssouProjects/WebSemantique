@@ -1,0 +1,62 @@
+# pour découvrir les trucs les plus utilisés
+
+PREFIX ont: <http://dbpedia.org/ontology/>
+SELECT ?v ?count WHERE {
+    {
+        SELECT ?v (count(?v) as ?count) WHERE {
+            ?g a <http://dbpedia.org/ontology/VideoGame>.
+            ?g ?v ?p.
+        }
+    }
+    FILTER(?count > 300).
+} ORDER BY DESC(?count) 
+
+
+# Nous avons identifié les propriétés suivantes, interessantes sur les jeux vidéos qui sont les plus utilisées:
+# 
+# http://dbpedia.org/property/title (titre dans certains cas)
+# http://xmlns.com/foaf/0.1/name (titre du jeu)
+# http://dbpedia.org/ontology/genre (jeu de tir, jeu de baston, etc..)
+# http://dbpedia.org/ontology/computingPlatform (PC, Wii, PS3, etc..)
+# http://dbpedia.org/property/modes (single player, multi player)
+# http://www.w3.org/ns/prov#wasDerivedFrom (jsais pas trop mais peut etre intéressant)
+# http://dbpedia.org/ontology/wikiPageID (page wikipedia)
+# http://dbpedia.org/ontology/releaseDate
+# http://dbpedia.org/property/released (release date mais sous une autre forme)
+# http://dbpedia.org/ontology/publisher
+# http://dbpedia.org/ontology/developer
+# http://dbpedia.org/ontology/thumbnail
+# 
+
+# TODO AJOUTER SERIES
+
+# du coup, la requete sparql permettant de récupérer toutes ces données est:
+
+PREFIX currentGame: <http://dbpedia.org/resource/Doom_(2016_video_game)>
+
+PREFIX title: <http://dbpedia.org/property/title>
+PREFIX name: <http://xmlns.com/foaf/0.1/name>
+PREFIX genre: <http://dbpedia.org/ontology/genre>
+PREFIX platform: <http://dbpedia.org/ontology/computingPlatform>
+PREFIX mode: <http://dbpedia.org/property/modes>
+PREFIX wikiPage: <http://dbpedia.org/ontology/wikiPageID>
+PREFIX releaseDate: <http://dbpedia.org/ontology/releaseDate>
+PREFIX releaseShit: <http://dbpedia.org/property/released>
+PREFIX publisher: <http://dbpedia.org/ontology/publisher>
+PREFIX developer: <http://dbpedia.org/ontology/developer>
+PREFIX thumbnail: <http://dbpedia.org/ontology/thumbnail>
+
+SELECT * WHERE
+{
+    currentGame: title: ?title.
+    currentGame: name: ?name.
+    currentGame: genre: ?genre.
+    currentGame: platform: ?platform.
+    currentGame: mode: ?mode.
+    currentGame: wikiPage: ?wikipage.
+    currentGame: releaseDate: ?releaseDate.
+    currentGame: releaseShit: ?releaseShit.
+    currentGame: publisher: ?publisher.
+    currentGame: developer: ?developer.
+    currentGame: thumbnail: ?thumbnail.
+}

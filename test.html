@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test page for DBpedia spotlight</title>
+        <script src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <text id="text">Super Mario Galaxy
+        </text>
+        <button id="Bouton">Launch dbpedia request</button>
+        <button id="Bouton2">SPARQL TEST</button>
+        <span id="result">
+            result
+        </span>
+    </body>
+
+    <script>
+        $("#Bouton").click(function test(){
+            $.ajax({
+                url: 'http://model.dbpedia-spotlight.org/en/annotate',
+                type: 'GET',
+                data: {
+                    text: document.getElementById("text").textContent,
+                    confidence: 0.5,
+                },
+                dataType: 'json'
+            })
+            .done(function(data) {
+                console.log(data);
+                document.getElementById("result").innerHTML = data;
+            })
+            .fail(function() {
+                console.log("fail");
+            })
+            .always(function() {
+            });
+
+        });
+
+        var url = "http://dbpedia.org/sparql";
+        var query = "\
+        SELECT * WHERE {\
+            <http://dbpedia.org/resource/Super_Mario_Galaxy> ?p ?v .\
+            }\
+            LIMIT 200";
+
+
+        var queryUrl = encodeURI( url+"?query="+query+"&format=json" );
+
+        $("#Bouton2").click(function test2(){
+            $.ajax({
+                dataType: "jsonp",  
+                url: queryUrl,
+                success: function( _data ) {
+                    var results = _data.results.bindings;
+                    for ( var i in results ) {
+                        var res = results[i].abstract.value;
+                        alert(res);
+                    }
+                }
+            })
+            .done(function(data) {
+                console.log(data);
+            })
+            .fail(function() {
+                console.log("fail");
+            })
+            .always(function() {
+            })
+        })
+        
+    </script>
+
+    <script type="text/javascript">
+        
+    </script>
+</html>
