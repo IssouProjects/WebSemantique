@@ -1,10 +1,7 @@
-var googleSearch = require('google')
-
 const express = require('express')
 const app = express()
 
 const dbpedia = require('./api/dbpedia.js')
-const search = require('./api/search.js')
 
 module.exports = app
 
@@ -41,24 +38,6 @@ app.get('/dbpedia/sparql', function (req, res) {
     res.set('Content-Type', 'application/json')
     res.send(body)
   })
-})
-
-app.get('/google/search', function (req, res) {
-  if(process.env.ENV_VARIABLE === 'dev') {
-    console.log(req.query)
-  }
-  googleSearch(req.query.query, function(err, result) {
-    res.set('Content-Type', 'application/json')
-    res.send(result.links)
-  })
-})
-
-app.get('/search', function (req, res) {
-  if(process.env.ENV_VARIABLE === 'dev') {
-    console.log(req.query)
-  }
-  search.search(req.query.q, function(response) {
-    res.send(response)
 })
 
 app.use('/assets', express.static('assets'));
