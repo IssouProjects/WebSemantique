@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 
 const dbpedia = require('./api/dbpedia.js')
-const jeu = require('./api/jeu.js')
 
 module.exports = app
 
