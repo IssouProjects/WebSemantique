@@ -27,6 +27,7 @@ module.exports = {
                 }
             });
 
+            dbpediaLink = dbpediaLink.replace('fr.', '')
 
             /*
             * Ici on recupere l'URI la plus representee et on construit
