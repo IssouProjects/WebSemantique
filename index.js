@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 
 const dbpedia = require('./api/dbpedia.js')
+const jeu = require('./api/jeu.js')
 
 module.exports = app
 
@@ -40,6 +41,29 @@ app.get('/dbpedia/sparql', function (req, res) {
   })
 })
 
+<<<<<<< HEAD
+=======
+app.get('/google/search', function (req, res) {
+  if(process.env.ENV_VARIABLE === 'dev') {
+    console.log(req.query)
+  }
+  googleSearch(req.query.query, function(err, result) {
+    res.set('Content-Type', 'application/json')
+    res.send(result.links)
+  })
+})
+
+app.get('/jeu/infos', function (req, res) {
+  if(process.env.ENV_VARIABLE === 'dev') {
+    console.log(req.query.text)
+  }
+  jeu.infos(function(error, response, body) {
+    res.set('Content-Type', 'application/json')
+    res.send(body)
+  })
+})
+
+>>>>>>> Début de page
 app.use('/assets', express.static('assets'));
 
 app.listen(app.get('port'), function() {
