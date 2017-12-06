@@ -1,5 +1,3 @@
-import { request } from 'https';
-
 const extract = require('./extract.js')
 const dbpedia = require('./dbpedia.js')
 const sparql = require('./sparql.js')
@@ -20,7 +18,7 @@ module.exports = {
             var max = 0;
             var dbpediaLink = "";
 
-            occurences.foreach(function(value, key, map){
+            occurences.forEach(function(value, key, map){
                 if(value >= max){
                   max = value;
                   dbpediaLink = key;
@@ -36,25 +34,25 @@ module.exports = {
             var promises = new Array()
             var requests = new Array()
 
-            request.push(sparql.reqTitle);
-            request.push(sparql.reqGenre);
-            request.push(sparql.reqMode);
-            request.push(sparql.reqName);
-            request.push(sparql.reqDeveloper);
-            request.push(sparql.reqPlatform);
-            request.push(sparql.reqPublisher);
-            request.push(sparql.reqReleaseDate);
-            request.push(sparql.reqReleaseShit);
-            request.push(sparql.reqTitle);
-            request.push(sparql.reqWikiPage);
+            requests.push(sparql.reqTitle());
+            requests.push(sparql.reqGenre());
+            requests.push(sparql.reqMode());
+            requests.push(sparql.reqName());
+            requests.push(sparql.reqDeveloper());
+            requests.push(sparql.reqPlatform());
+            requests.push(sparql.reqPublisher());
+            requests.push(sparql.reqReleaseDate());
+            requests.push(sparql.reqReleaseShit());
+            requests.push(sparql.reqTitle());
+            requests.push(sparql.reqWikiPage());
 
-            requests.forEach(function(element){
-                element = "PREFIX currentGame: <" + dbpediaLink + ">\n" + element;
-            });
+            for(var i = 0; i<requests.length; i++){
+                requests[i] = "PREFIX currentGame: <" + dbpediaLink + ">\n" + requests[i];
+            }
 
             var results = new Array()
 
-            foreach(requests, function(element) {
+            requests.forEach(function(element) {
                 promises.push(new Promise(function(resolve, reject) {
                     dbpedia.sparqlRequest(element, function(err, response, body) {
                         results.push(body)
