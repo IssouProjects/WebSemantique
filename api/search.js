@@ -1,5 +1,8 @@
+import { request } from 'https';
+
 const extract = require('./extract.js')
 const dbpedia = require('./dbpedia.js')
+const sparql = require('./sparql.js')
 
 module.exports = {
     /*
@@ -25,7 +28,6 @@ module.exports = {
             });
 
 
-
             /*
             * Ici on recupere l'URI la plus representee et on construit
             * la requete SPARQL avec elle
@@ -33,6 +35,23 @@ module.exports = {
 
             var promises = new Array()
             var requests = new Array()
+
+            request.push(sparql.reqTitle);
+            request.push(sparql.reqGenre);
+            request.push(sparql.reqMode);
+            request.push(sparql.reqName);
+            request.push(sparql.reqDeveloper);
+            request.push(sparql.reqPlatform);
+            request.push(sparql.reqPublisher);
+            request.push(sparql.reqReleaseDate);
+            request.push(sparql.reqReleaseShit);
+            request.push(sparql.reqTitle);
+            request.push(sparql.reqWikiPage);
+
+            requests.forEach(function(element){
+                element = "PREFIX currentGame: <" + dbpediaLink + ">\n" + element;
+            });
+
             var results = new Array()
 
             foreach(requests, function(element) {
@@ -47,7 +66,7 @@ module.exports = {
             Promise.all(promises, afterSparqlRequest)
         }
 
-        function afterSparqlRequest(err, response, body) {
+        function afterSparqlRequest(results) {
             /*
             * Ici apres le resultat de la requete SPARQL
             * On analyse ce resultat et on construit un objet

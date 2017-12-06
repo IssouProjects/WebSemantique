@@ -49,14 +49,54 @@ PREFIX thumbnail: <http://dbpedia.org/ontology/thumbnail>
 SELECT * WHERE
 {
     currentGame: title: ?title.
+}
+
+SELECT * WHERE
+{
     currentGame: name: ?name.
+}
+
+SELECT * WHERE
+{
     currentGame: genre: ?genre.
+}
+
+SELECT * WHERE
+{
     currentGame: platform: ?platform.
+}
+
+SELECT * WHERE
+{
     currentGame: mode: ?mode.
+}
+
+SELECT * WHERE
+{
     currentGame: wikiPage: ?wikipage.
+}
+
+SELECT * WHERE
+{
     currentGame: releaseDate: ?releaseDate.
+}
+
+SELECT * WHERE
+{
     currentGame: releaseShit: ?releaseShit.
+}
+
+SELECT * WHERE
+{
     currentGame: publisher: ?publisher.
+}
+
+SELECT * WHERE
+{
     currentGame: developer: ?developer.
+}
+
+SELECT * WHERE
+{
     currentGame: thumbnail: ?thumbnail.
 }
