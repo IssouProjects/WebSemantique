@@ -61,7 +61,7 @@ module.exports = {
                 }))
             })
 
-            Promise.all(promises, afterSparqlRequest)
+            Promise.all(promises).then(afterSparqlRequest)
         }
 
         function afterSparqlRequest(results) {
