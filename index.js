@@ -59,7 +59,6 @@ app.get('/search', function (req, res) {
   }
   search.search(req.query.q, function(response) {
     res.send(response)
-  })
 })
 
 app.use('/assets', express.static('assets'));
