@@ -27,7 +27,7 @@ module.exports = {
     },
 
     spotlight: function(query, callback) {
-        const url = 'http://model.dbpedia-spotlight.org/en/spot'
+        const url = 'http://model.dbpedia-spotlight.org/fr/spot'
         
         const parameters = {
             text: query
