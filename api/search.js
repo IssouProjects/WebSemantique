@@ -10,6 +10,8 @@ module.exports = {
     */
     search: function(query, callback) {
 
+        let results = new Array()
+
         extract.results(query, afterExtractGoogle)
 
         /* Fonctions de callback */
@@ -50,8 +52,6 @@ module.exports = {
                 requests[i] = "PREFIX currentGame: <" + dbpediaLink + ">\n" + requests[i];
             }
 
-            var results = new Array()
-
             requests.forEach(function(element) {
                 promises.push(new Promise(function(resolve, reject) {
                     dbpedia.sparqlRequest(element, function(err, response, body) {
@@ -64,14 +64,14 @@ module.exports = {
             Promise.all(promises).then(afterSparqlRequest)
         }
 
-        function afterSparqlRequest(results) {
+        function afterSparqlRequest() {
             /*
             * Ici apres le resultat de la requete SPARQL
             * On analyse ce resultat et on construit un objet
             * que l'on va renvoyer dans le callback (ie le navigateur)
             */
 
-            callback('Reached the end!')
+            callback(results)
         }
     }
 }
