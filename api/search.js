@@ -13,14 +13,40 @@ module.exports = {
 
         /* Fonctions de callback */
         function afterExtractGoogle(occurences) {
+
+            var max = 0;
+            var dbpediaLink = "";
+
+            occurences.foreach(function(value, key, map){
+                if(value >= max){
+                  max = value;
+                  dbpediaLink = key;
+                }
+            });
+
+
+
             /*
             * Ici on recupere l'URI la plus representee et on construit
             * la requete SPARQL avec elle
             */
 
-            dbpedia.sparqlRequest('select distinct ?Concept where {[] a ?Concept} LIMIT 100', afterSparqlRequest)
+            var promises = new Array()
+            var requests = new Array()
+            var results = new Array()
+
+            foreach(requests, function(element) {
+                promises.push(new Promise(function(resolve, reject) {
+                    dbpedia.sparqlRequest(element, function(err, response, body) {
+                        results.push(body)
+                        resolve()
+                    })
+                }))
+            })
+
+            Promise.all(promises, afterSparqlRequest)
         }
-        
+
         function afterSparqlRequest(err, response, body) {
             /*
             * Ici apres le resultat de la requete SPARQL
