@@ -18,7 +18,7 @@ module.exports = {
         google(query, function(err, res) {
             for(var i = 0; i<numberResults; i++) {
                 annotateQueries[i] = new Promise(function(resolve, reject) {
-                    dbpedia.annotate(res.links[i].description, function(err, response, body) {
+                    dbpedia.annotate(res.links[i].title, function(err, response, body) {
                         if(response.statusCode === 200) {
                             results.push(body)
                         }
