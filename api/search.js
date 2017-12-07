@@ -71,8 +71,30 @@ module.exports = {
             * On analyse ce resultat et on construit un objet
             * que l'on va renvoyer dans le callback (ie le navigateur)
             */
-
-            callback(results)
+            
+            callback(convertJSON(results))
         }
     }
+}
+
+function convertJSON(results) {
+    var retour = new Object()
+
+    results.forEach(function(elem) {
+        elem.results.bindings.forEach(function(properties) {
+            var property = Object.getOwnPropertyNames(properties)[0]
+            var list = new Array()
+            try {
+                elem.results.bindings.forEach(function(result) {
+                    list.push(result[property])
+                })
+            } catch (e) {
+                // It is not a list
+                list.push(properties[property])
+            }
+            retour[property] = list
+        })
+    })
+
+    return retour
 }
