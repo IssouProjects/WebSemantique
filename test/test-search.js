@@ -9,9 +9,22 @@ process.env.ENV_VARIABLE = 'test'
 describe('Search', function() {
     this.timeout(10000)
 
-    it('should correctly give an object with the specific properties', (done) => {
+    it('should correctly return an object with the specific properties', (done) => {
         search.search('League of Legends', function(results) {
-            results.should.be.an('Array')
+            results.should.be.an('Object')
+
+            results.should.have.property('developer')
+            results.should.have.property('genre')
+            results.should.have.property('mode')
+            results.should.have.property('name')
+            results.should.have.property('platform')
+            results.should.have.property('publisher')
+            results.should.have.property('releaseDate')
+            results.should.have.property('wikipage')
+
+            results.developer[0].value.should.equals('http://dbpedia.org/resource/Riot_Games')
+            results.genre[0].value.should.equals('http://dbpedia.org/resource/Multiplayer_online_battle_arena')
+
             done()
         })
     })
