@@ -1,4 +1,4 @@
-$("#search").click(function () {
+$("#spotlight").click(function () {
     if(document.getElementById("query").value === '') {return}
     $.get({
         url: 'dbpedia/annotate',
