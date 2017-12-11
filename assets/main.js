@@ -9,6 +9,19 @@ $("#search").click(function () {
         dataType: 'json'
     })
         .done(function (data) {
+
+            console.log(data)
+
+                for (var key in data) {
+                    if (data.hasOwnProperty(key)) {
+                      var val = data[key][0].value;
+                      var elem = document.getElementById(key);
+                      if(elem!=null){
+                        document.getElementById(key).innerHTML = val;
+                      }
+                    }
+                }
+            
             
         })
         .fail(function () {
