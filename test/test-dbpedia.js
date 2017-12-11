@@ -15,7 +15,7 @@ describe('DBpedia', function () {
             body.should.have.property('Resources')
             body.Resources.should.be.an('Array')
             body.Resources[0].should.have.property('@URI')
-            body.Resources[0]['@URI'].should.equals('http://dbpedia.org/resource/Lyon')
+            body.Resources[0]['@URI'].should.equals('http://fr.dbpedia.org/resource/Lyon')
             done()
         })
     })
