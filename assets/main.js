@@ -18,17 +18,18 @@ $("#search").click(function () {
     })
         .done(function (data) {
 
-                for (var key in data) {
-                    if (data.hasOwnProperty(key)) {
-                      var val = data[key][0].value;
-                      var elem = document.getElementById(key);
-                      if(elem!=null){
-                        array = val.split('/');
-                        document.getElementById(key).innerHTML = "<a href='"+ val + "'>" + array[array.length -1].replace(/_/g, ' ') +"</a>";
-                      }
-                    }
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    for(i=0; i< data[key].length; ++i){ 
+                        var val = data[key][i].value;
+                        var elem = document.getElementById(key);
+                        if(elem!=null){
+                            array = val.split('/');
+                            document.getElementById(key).innerHTML = document.getElementById(key).innerHTML + "<a href='"+ val + "'>" + array[array.length -1].replace(/_/g, ' ') +"</a>";
+                        }
+                    }    
                 }
-            
+            }
             
         })
         .fail(function () {
