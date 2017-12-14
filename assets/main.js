@@ -24,7 +24,7 @@ $("#search").click(function () {
                       var elem = document.getElementById(key);
                       if(elem!=null){
                         array = val.split('/');
-                        document.getElementById(key).innerHTML = array[array.length -1];
+                        document.getElementById(key).innerHTML = array[array.length -1].replace(/_/g, ' ');
                       }
                     }
                 }
