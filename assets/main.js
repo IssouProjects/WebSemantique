@@ -25,7 +25,12 @@ $("#search").click(function () {
                         var elem = document.getElementById(key);
                         if(elem!=null){
                             array = val.split('/');
-                            document.getElementById(key).innerHTML = document.getElementById(key).innerHTML + "<a href='"+ val + "'>" + array[array.length -1].replace(/_/g, ' ') +"</a>";
+                            if (i == 0){
+                                document.getElementById(key).innerHTML = "<a href='"+ val + "'>" + array[array.length -1].replace(/_/g, ' ') +"</a>";
+                            }
+                            else {
+                                document.getElementById(key).innerHTML = document.getElementById(key).innerHTML + ", <a href='"+ val + "'>" + array[array.length -1].replace(/_/g, ' ') +"</a>";
+                            }     
                         }
                     }    
                 }
