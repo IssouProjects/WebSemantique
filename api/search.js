@@ -83,6 +83,8 @@ module.exports = {
             requests.push(sparql.reqReleaseDate());
             requests.push(sparql.reqReleaseShit());
             requests.push(sparql.reqTitle());
+            requests.push(sparql.description());
+
 			//requests.push(sparql.reqSimilaire());
             //requests.push(sparql.reqWikiPage());
 
@@ -127,8 +129,9 @@ module.exports = {
 
         function afterDevRequests(videoGameURI) {
             return(new Promise(function(resolve, reject) {
-                results = convertJSON(results);
-                dbpedia.sparqlRequest(sparql.reqSimilaire(results2.developer[0].value, results2.genre[0].value, videoGameURI), function(err, response, body) {
+                results = convertJSON(results)
+                results.videoGameURI = videoGameURI[0];
+                dbpedia.sparqlRequest(sparql.reqSimilaire(results.developer[0].value, results.genre[0].value, videoGameURI), function(err, response, body) {
                     results.similarGames = body.results.bindings
                     resolve()
                 })
@@ -156,7 +159,10 @@ function convertJSON(results) {
             var list = new Array()
             try {
                 elem.results.bindings.forEach(function(result) {
-                    list.push(result[property])
+                    if(result[property]['xml:lang'] == undefined || result[property]['xml:lang'] == "en")
+                    {
+                        list.push(result[property]);
+                    }
                 })
             } catch (e) {
                 // It is not a list

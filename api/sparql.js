@@ -8,6 +8,16 @@ module.exports = {
         }";
     },
 
+    description: function() {
+        return "PREFIX description: <http://dbpedia.org/ontology/abstract>\n\
+        \
+        SELECT * WHERE\
+        {\
+            currentGame: description: ?description.\
+        }";
+        
+    },
+
     checkIfVideoGame: function() {
         return "PREFIX type: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\n\
         PREFIX videoGame: <http://dbpedia.org/ontology/VideoGame>\n\
