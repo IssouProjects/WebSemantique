@@ -100,10 +100,10 @@ module.exports = {
     },
 	
 	reqSimilaire: function(developer){
-        return "PREFIX similaire: <http://dbpedia.org/ontology/developer>\n\
+        return "PREFIX developer: <http://dbpedia.org/ontology/developer>\n\
         SELECT * WHERE\
         {\
-            currentGame: similaire: "+ developer +".\
+            ?similaire developer: <"+ developer +">.\
         }";
     }
 }
