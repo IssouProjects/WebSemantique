@@ -55,6 +55,13 @@ $("#search").click(function () {
                     }    
                 }
             }
+
+            data.similarGames.forEach(element => {
+                var game = document.createElement("p")
+                var array = element.similaire.value.split('/')
+                game.innerHTML = '<a href="' + element.similaire.value + '">' + array[array.length -1].replace(/_/g, ' ') + '</a>'
+                document.getElementById("similaires").appendChild(game)
+            });
             
         })
         .fail(function () {
