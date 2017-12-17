@@ -80,7 +80,7 @@ module.exports = {
             requests.push(sparql.reqReleaseDate());
             requests.push(sparql.reqReleaseShit());
             requests.push(sparql.reqTitle());
-            requests.push(sparql.reqWikiPage());
+            //requests.push(sparql.reqWikiPage());
 
             for(var i = 0; i<requests.length; i++){
                 requests[i] = "PREFIX currentGame: <" + videoGameURI + ">\n" + requests[i];

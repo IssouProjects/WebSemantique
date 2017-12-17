@@ -20,7 +20,6 @@ describe('Search', function() {
             results.should.have.property('platform')
             results.should.have.property('publisher')
             results.should.have.property('releaseDate')
-            results.should.have.property('wikipage')
 
             results.developer[0].value.should.equals('http://dbpedia.org/resource/Riot_Games')
             results.genre[0].value.should.equals('http://dbpedia.org/resource/Multiplayer_online_battle_arena')
