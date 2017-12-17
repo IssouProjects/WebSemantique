@@ -1,4 +1,5 @@
-const extract = require('./extract.js')
+const google = require('google')
+
 const dbpedia = require('./dbpedia.js')
 const sparql = require('./sparql.js')
 
@@ -14,23 +15,24 @@ module.exports = {
 
         let isVideoGame = false;
 
-        extract.results(query, afterExtractGoogle)
+        google.resultsPerPage = 25
+        google(query, afterGoogleSearch)
 
-        function afterExtractGoogle(occurences) {
+        function afterGoogleSearch(err, res) {
 
             /* on récupere l'URI la plus fréquente des resultats google */
 
             var max = 0;
             var dbpediaLink = "";
+            var wikipediaLink = "";
 
-            occurences.forEach(function(value, key, map){
-                if(value >= max){
-                  max = value;
-                  dbpediaLink = key;
+            res.links.forEach(function(value, key, map){
+                if(value.title.includes('Wikipedia')) {
+                    wikipediaLink = value.link
                 }
             });
 
-            dbpediaLink = dbpediaLink.replace('fr.', '')
+            dbpediaLink = wikipediaLink.replace('https://en.wikipedia.org/wiki', 'http://dbpedia.org/resource')
 
             /*
              * On teste si l'URI obtenu correspond bien à la page d'un jeu vidéal
