@@ -83,6 +83,8 @@ module.exports = {
             requests.push(sparql.reqReleaseDate());
             requests.push(sparql.reqReleaseShit());
             requests.push(sparql.reqTitle());
+            requests.push(sparql.description());
+
 			//requests.push(sparql.reqSimilaire());
             //requests.push(sparql.reqWikiPage());
 
@@ -135,7 +137,10 @@ function convertJSON(results) {
             var list = new Array()
             try {
                 elem.results.bindings.forEach(function(result) {
-                    list.push(result[property])
+                    if(result[property]['xml:lang'] == undefined || result[property]['xml:lang'] == "en")
+                    {
+                        list.push(result[property]);
+                    }
                 })
             } catch (e) {
                 // It is not a list
