@@ -17,7 +17,7 @@ $("#search").click(function () {
         dataType: 'json'
     })
         .done(function (data) {
-
+            console.log(data)
             for (var key in data) {
                 if (data.hasOwnProperty(key)) {
                     for(i=0; i< data[key].length; ++i){ 
@@ -25,11 +25,21 @@ $("#search").click(function () {
                         var elem = document.getElementById(key);
                         if(elem!=null){
                             array = val.split('/');
-                            if (i == 0){
-                                document.getElementById(key).innerHTML = "<a href='"+ val + "'>" + array[array.length -1].replace(/_/g, ' ') +"</a>";
-                            }
-                            else {
-                                document.getElementById(key).innerHTML = document.getElementById(key).innerHTML + ", <a href='"+ val + "'>" + array[array.length -1].replace(/_/g, ' ') +"</a>";
+                            if(data[key][i].type == "uri")
+                                if (i == 0){
+                                    document.getElementById(key).innerHTML = "<a href='"+ val + "'>" + array[array.length -1].replace(/_/g, ' ') +"</a>";
+                                }
+                                else {
+                                    document.getElementById(key).innerHTML = document.getElementById(key).innerHTML + ", <a href='"+ val + "'>" + array[array.length -1].replace(/_/g, ' ') +"</a>";
+                                }
+                            else{
+                                if (i == 0){
+                                    document.getElementById(key).innerHTML =val ;
+                                }
+                                else {
+                                    document.getElementById(key).innerHTML = document.getElementById(key).innerHTML + ", "+ val;
+                                }
+
                             }     
                         }
                     }    
