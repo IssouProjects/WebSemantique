@@ -17,12 +17,6 @@ $("#search").click(function () {
         dataType: 'json'
     })
         .done(function (data) {
-            console.log(data)
-            console.log(data.value)
-
-            if(data == null){
-                alert('pb');
-            }else{
 
             for (var key in data) {
                 if (data.hasOwnProperty(key)) {
@@ -51,7 +45,6 @@ $("#search").click(function () {
                     }    
                 }
             }
-        }
             
         })
         .fail(function () {
