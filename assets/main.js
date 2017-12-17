@@ -18,6 +18,12 @@ $("#search").click(function () {
     })
         .done(function (data) {
             console.log(data)
+            console.log(data.value)
+
+            if(data == null){
+                alert('pb');
+            }else{
+
             for (var key in data) {
                 if (data.hasOwnProperty(key)) {
                     for(i=0; i< data[key].length; ++i){ 
@@ -45,10 +51,11 @@ $("#search").click(function () {
                     }    
                 }
             }
+        }
             
         })
         .fail(function () {
-            alert('Une erreur est survenue')
+            alert('Une erreur est survenue, vérifiez que vous recherchez bien un jeu vidéo.');
         })
         .always(function (data) {
         });
