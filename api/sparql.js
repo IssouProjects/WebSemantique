@@ -8,6 +8,16 @@ module.exports = {
         }";
     },
 
+    checkIfVideoGame: function() {
+        return "PREFIX type: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\n\
+        PREFIX videoGame: <http://dbpedia.org/ontology/VideoGame>\n\
+        \
+        ask\
+        {\
+            currentResource: type: videoGame:.\
+        }";
+    },
+
     reqName: function() {
         return "PREFIX name: <http://xmlns.com/foaf/0.1/name>\n\
         \
