@@ -4,7 +4,7 @@ $("#search").click(function () {
     document.getElementById("developer").innerHTML = '';
     document.getElementById("name").innerHTML = '';
     document.getElementById("releaseDate").innerHTML = '';
-    document.getElementById("wikipage").innerHTML = '';
+    //document.getElementById("wikipage").innerHTML = '';
     document.getElementById("mode").innerHTML = '';
     document.getElementById("publisher").innerHTML = '';
     document.getElementById("platform").innerHTML = '';
