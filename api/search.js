@@ -94,7 +94,7 @@ module.exports = {
                 promises.push(new Promise(function(resolve, reject) {
                     dbpedia.sparqlRequest(element, function(err, response, body) {
                         results.push(body)
-                        resolve()
+                        resolve(videoGameURI)
                     })
                 }))
             })
@@ -104,10 +104,10 @@ module.exports = {
                 .then(afterSparqlRequest)
         }
 
-        function afterGameRequests() {
+        function afterGameRequests(videoGameURI) {
             return(new Promise(function(resolve, reject) {
                 results = convertJSON(results)
-                dbpedia.sparqlRequest(sparql.reqSimilaire(results.developer[0].value), function(err, response, body) {
+                dbpedia.sparqlRequest(sparql.reqSimilaire(results.developer[0].value, results.genre[0].value, videoGameURI), function(err, response, body) {
                     results.similarGames = body.results.bindings
                     resolve()
                 })
