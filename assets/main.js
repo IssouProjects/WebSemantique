@@ -17,7 +17,7 @@ $("#search").click(function () {
         dataType: 'json'
     })
         .done(function (data) {
-            console.log(data)
+
             for (var key in data) {
                 if (data.hasOwnProperty(key)) {
                     for(i=0; i< data[key].length; ++i){ 
@@ -48,7 +48,7 @@ $("#search").click(function () {
             
         })
         .fail(function () {
-            alert('Une erreur est survenue')
+            alert('Une erreur est survenue, vérifiez que vous recherchez bien un jeu vidéo.');
         })
         .always(function (data) {
         });
