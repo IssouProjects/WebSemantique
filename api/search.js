@@ -100,14 +100,14 @@ module.exports = {
             })
 
             Promise.all(promises)
-                .then(afterGameRequests)
+                .then(afterGameRequests(videoGameURI))
                 .then(afterSparqlRequest)
         }
 
-        function afterGameRequests() {
+        function afterGameRequests(videoGameURI) {
             results = convertJSON(results)
             return(new Promise(function(resolve, reject) {
-                dbpedia.sparqlRequest(sparql.reqSimilaire(results.developer[0].value), function(err, response, body) {
+                dbpedia.sparqlRequest(sparql.reqSimilaire(results.developer[0].value, results.genre[0].value, videoGameURI), function(err, response, body) {
                     results.similarGames = body
                     resolve()
                 })
