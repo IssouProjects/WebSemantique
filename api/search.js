@@ -109,6 +109,7 @@ module.exports = {
         function afterGameRequests(videoGameURI) {
             return(new Promise(function(resolve, reject) {
                 results = convertJSON(results)
+                results.videoGameURI = videoGameURI;
                 dbpedia.sparqlRequest(sparql.reqSimilaire(results.developer[0].value, results.genre[0].value, videoGameURI), function(err, response, body) {
                     results.similarGames = body.results.bindings
                     resolve()
