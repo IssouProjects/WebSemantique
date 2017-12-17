@@ -63,6 +63,10 @@ $("#search").click(function () {
                 game.innerHTML = '<a href="' + element.similaire.value + '">' + array[array.length -1].replace(/_/g, ' ') + '</a>'
                 document.getElementById("similaires").appendChild(game)
             });
+
+            if(document.getElementById("name").innerHTML === ''){
+                document.getElementById("name").innerHTML = document.getElementById("query").value;
+            }
             
         })
         .fail(function () {
