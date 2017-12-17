@@ -14,6 +14,7 @@ $("#search").click(function () {
     document.getElementById("mode").innerHTML = '';
     document.getElementById("publisher").innerHTML = '';
     document.getElementById("platform").innerHTML = '';
+    document.getElementById("similaires").innerHTML = '';
 
     document.getElementById("search").className = "btn btn-info"
     document.getElementById("search").disabled = true
@@ -55,6 +56,13 @@ $("#search").click(function () {
                     }    
                 }
             }
+
+            data.similarGames.forEach(element => {
+                var game = document.createElement("p")
+                var array = element.similaire.value.split('/')
+                game.innerHTML = '<a href="' + element.similaire.value + '">' + array[array.length -1].replace(/_/g, ' ') + '</a>'
+                document.getElementById("similaires").appendChild(game)
+            });
             
         })
         .fail(function () {
