@@ -65,8 +65,8 @@ $("#search").click(function () {
                 document.getElementById("similaires").appendChild(game)
             });
             
-            var array = data.videoGameUri.split('/')
-            document.getElementById("name").innerHTML = '<a href="' + data.videoGameUri + '">' + array[array.length -1].replace(/_/g, ' ') + '</a>'
+            var array = data.videoGameURI.split('/')
+            document.getElementById("name").innerHTML = '<a href="' + data.videoGameURI + '">' + array[array.length -1].replace(/_/g, ' ') + '</a>'
             
         })
         .fail(function () {
