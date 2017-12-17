@@ -16,6 +16,8 @@ $("#search").click(function () {
     document.getElementById("platform").innerHTML = '';
     document.getElementById("description").innerHTML = '';
 
+    document.getElementById("numberEmploye").innerHTML = '';
+
     document.getElementById("similaires").innerHTML = '';
 
     document.getElementById("search").className = "btn btn-info"
