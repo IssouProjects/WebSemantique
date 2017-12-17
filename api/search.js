@@ -84,6 +84,7 @@ module.exports = {
             requests.push(sparql.reqReleaseShit());
             requests.push(sparql.reqTitle());
             requests.push(sparql.description());
+
 			//requests.push(sparql.reqSimilaire());
             //requests.push(sparql.reqWikiPage());
 

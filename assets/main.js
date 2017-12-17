@@ -15,6 +15,7 @@ $("#search").click(function () {
     document.getElementById("publisher").innerHTML = '';
     document.getElementById("platform").innerHTML = '';
     document.getElementById("description").innerHTML = '';
+
     document.getElementById("similaires").innerHTML = '';
 
     document.getElementById("search").className = "btn btn-info"
