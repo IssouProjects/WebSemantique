@@ -12,10 +12,13 @@ module.exports = {
 
         let results = new Array()
 
+        let isVideoGame = false;
+
         extract.results(query, afterExtractGoogle)
 
-        /* Fonctions de callback */
         function afterExtractGoogle(occurences) {
+
+            /* on récupere l'URI la plus fréquente des resultats google */
 
             var max = 0;
             var dbpediaLink = "";
@@ -30,9 +33,39 @@ module.exports = {
             dbpediaLink = dbpediaLink.replace('fr.', '')
 
             /*
-            * Ici on recupere l'URI la plus representee et on construit
-            * la requete SPARQL avec elle
-            */
+             * On teste si l'URI obtenu correspond bien à la page d'un jeu vidéal
+             */
+            
+            var checkVGreq = "PREFIX currentResource: <"+dbpediaLink+">\n";
+            checkVGreq += sparql.checkIfVideoGame();
+
+            var promise = new Promise(function(resolve, reject) {
+                dbpedia.sparqlRequest(checkVGreq, function(err, response, body) {
+                    isVideoGame = false;
+                    try {
+                        isVideoGame = body.boolean;
+                    } catch (e) {
+                        let errorMessage = "ERROR: could not check if the URI provided was a video game\n";
+                        errorMessage += response;
+                        console.error(errorMessage);
+                    }
+
+                    resolve();
+                })
+            });
+
+            promise.then(function(){
+                if(isVideoGame){
+                    extractDbPediaData(dbpediaLink);
+                } else {
+                    callback(null); //what should we do if the game does not exists @AmosTrask ? @Raul6469 ?
+                }
+            });
+        }
+
+        function extractDbPediaData(videoGameURI){
+        
+            /* on construit la requete qui va nous permettre d'obtenir les infos intéressantes */
 
             var promises = new Array()
             var requests = new Array()
@@ -50,7 +83,7 @@ module.exports = {
             requests.push(sparql.reqWikiPage());
 
             for(var i = 0; i<requests.length; i++){
-                requests[i] = "PREFIX currentGame: <" + dbpediaLink + ">\n" + requests[i];
+                requests[i] = "PREFIX currentGame: <" + videoGameURI + ">\n" + requests[i];
             }
 
             requests.forEach(function(element) {
