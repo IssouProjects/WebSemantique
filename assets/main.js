@@ -14,7 +14,7 @@ $("#search").click(function () {
     document.getElementById("mode").innerHTML = '';
     document.getElementById("publisher").innerHTML = '';
     document.getElementById("platform").innerHTML = '';
-
+    document.getElementById("description").innerHTML = '';
     document.getElementById("search").className = "btn btn-info"
     document.getElementById("search").disabled = true
 
@@ -49,7 +49,6 @@ $("#search").click(function () {
                                 else {
                                     document.getElementById(key).innerHTML = document.getElementById(key).innerHTML + ", "+ val;
                                 }
-
                             }     
                         }
                     }    
