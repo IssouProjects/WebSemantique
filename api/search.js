@@ -71,6 +71,7 @@ module.exports = {
 
             var promises = new Array()
             var requests = new Array()
+			let simiPromise = new Array()
 
             requests.push(sparql.reqTitle());
             requests.push(sparql.reqGenre());
@@ -83,6 +84,7 @@ module.exports = {
             requests.push(sparql.reqReleaseShit());
             requests.push(sparql.reqTitle());
             requests.push(sparql.description());
+			//requests.push(sparql.reqSimilaire());
             //requests.push(sparql.reqWikiPage());
 
             for(var i = 0; i<requests.length; i++){
@@ -93,12 +95,24 @@ module.exports = {
                 promises.push(new Promise(function(resolve, reject) {
                     dbpedia.sparqlRequest(element, function(err, response, body) {
                         results.push(body)
-                        resolve()
+                        resolve(videoGameURI)
                     })
                 }))
             })
 
-            Promise.all(promises).then(afterSparqlRequest)
+            Promise.all(promises)
+                .then(afterGameRequests)
+                .then(afterSparqlRequest)
+        }
+
+        function afterGameRequests(videoGameURI) {
+            return(new Promise(function(resolve, reject) {
+                results = convertJSON(results)
+                dbpedia.sparqlRequest(sparql.reqSimilaire(results.developer[0].value, results.genre[0].value, videoGameURI), function(err, response, body) {
+                    results.similarGames = body.results.bindings
+                    resolve()
+                })
+            }))
         }
 
         function afterSparqlRequest() {
@@ -108,7 +122,7 @@ module.exports = {
             * que l'on va renvoyer dans le callback (ie le navigateur)
             */
             
-            callback(convertJSON(results))
+            callback(results)
         }
     }
 }

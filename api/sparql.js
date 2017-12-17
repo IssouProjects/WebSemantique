@@ -107,5 +107,17 @@ module.exports = {
         {\
             currentGame: thumbnail: ?thumbnail.\
         }";
+    },
+	
+	reqSimilaire: function(developer, genre, game){
+        return "PREFIX developer: <http://dbpedia.org/ontology/developer>\n\
+        PREFIX genre: <http://dbpedia.org/ontology/genre>\n\
+        PREFIX currentGame: <" + game + ">\n\
+        SELECT * WHERE\
+        {\
+            ?similaire developer: <"+ developer +">.\
+            ?similaire genre: <" + genre + ">.\
+            FILTER(?similaire != currentGame:).\
+        }";
     }
 }
