@@ -8,6 +8,10 @@ $("#search").click(function () {
     document.getElementById("mode").innerHTML = '';
     document.getElementById("publisher").innerHTML = '';
     document.getElementById("platform").innerHTML = '';
+
+    document.getElementById("search").className = "btn btn-info"
+    document.getElementById("search").disabled = true
+
     $.get({
         url: 'search',
         type: 'GET',
@@ -51,5 +55,7 @@ $("#search").click(function () {
             alert('Une erreur est survenue, vérifiez que vous recherchez bien un jeu vidéo.');
         })
         .always(function (data) {
+            document.getElementById("search").className = "btn btn-primary"
+            document.getElementById("search").disabled = false
         });
 });
