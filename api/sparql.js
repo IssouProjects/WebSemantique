@@ -99,11 +99,11 @@ module.exports = {
         }";
     },
 	
-	reqSimilaire: function(){
+	reqSimilaire: function(developer){
         return "PREFIX similaire: <http://dbpedia.org/ontology/developer>\n\
         SELECT * WHERE\
         {\
-            currentGame: similaire: ?similaire.\
+            currentGame: similaire: "+ developer +".\
         }";
     }
 }

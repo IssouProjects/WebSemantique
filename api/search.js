@@ -100,13 +100,15 @@ module.exports = {
             })
 
             Promise.all(promises).then(
-			simiPromise.push(new Promise(function(resolve, reject) {
-                    dbpedia.sparqlRequest(sparql.reqSimilaire(), function(err, response, body) {
+                simiPromise.push(new Promise(function(resolve, reject) {
+                    dbpedia.sparqlRequest(sparql.reqSimilaire(developer), function(err, response, body) {
                         results.push(body)
                         resolve()
                     })
-            })),
-			Promise.all(simiPromise).then(afterSparqlRequest))
+                }))
+            )
+
+			Promise.all(simiPromise).then(afterSparqlRequest)
         }
 
         function afterSparqlRequest() {
