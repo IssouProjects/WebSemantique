@@ -71,6 +71,7 @@ module.exports = {
 
             var promises = new Array()
             var requests = new Array()
+			var simiPromise = new Array()
 
             requests.push(sparql.reqTitle());
             requests.push(sparql.reqGenre());
@@ -82,6 +83,7 @@ module.exports = {
             requests.push(sparql.reqReleaseDate());
             requests.push(sparql.reqReleaseShit());
             requests.push(sparql.reqTitle());
+			//requests.push(sparql.reqSimilaire());
             //requests.push(sparql.reqWikiPage());
 
             for(var i = 0; i<requests.length; i++){
@@ -97,7 +99,14 @@ module.exports = {
                 }))
             })
 
-            Promise.all(promises).then(afterSparqlRequest)
+            Promise.all(promises).then(
+			simiPromise.push(new Promise(function(resolve, reject) {
+                    dbpedia.sparqlRequest(sparql.reqSimilaire(), function(err, response, body) {
+                        results.push(body)
+                        resolve()
+                    })
+            })),
+			Promise.all(simiPromise).then(afterSparqlRequest))
         }
 
         function afterSparqlRequest() {

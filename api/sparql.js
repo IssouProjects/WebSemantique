@@ -97,5 +97,13 @@ module.exports = {
         {\
             currentGame: thumbnail: ?thumbnail.\
         }";
+    },
+	
+	reqSimilaire: function(){
+        return "PREFIX similaire: <http://dbpedia.org/ontology/developer>\n\
+        SELECT * WHERE\
+        {\
+            currentGame: similaire: ?similaire.\
+        }";
     }
 }
