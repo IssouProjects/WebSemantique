@@ -8,7 +8,7 @@ process.env.ENV_VARIABLE = 'test'
 
 describe('DBpedia', function () {
 
-    this.timeout(10000)
+    this.timeout(100000)
 
     it('should correctly annotate a text', (done) => {
         dbpedia.annotate('Lyon', function(error, response, body) {

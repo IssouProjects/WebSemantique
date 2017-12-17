@@ -7,7 +7,7 @@ let search = require('../api/search')
 process.env.ENV_VARIABLE = 'test'
 
 describe('Search', function() {
-    this.timeout(10000)
+    this.timeout(100000)
 
     it('should correctly return an object with the specific properties', (done) => {
         search.search('League of Legends', function(results) {
