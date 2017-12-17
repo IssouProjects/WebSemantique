@@ -105,10 +105,10 @@ module.exports = {
         }
 
         function afterGameRequests() {
-            results = convertJSON(results)
             return(new Promise(function(resolve, reject) {
+                results = convertJSON(results)
                 dbpedia.sparqlRequest(sparql.reqSimilaire(results.developer[0].value), function(err, response, body) {
-                    results.similarGames = body
+                    results.similarGames = body.results.bindings
                     resolve()
                 })
             }))
