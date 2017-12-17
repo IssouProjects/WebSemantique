@@ -1,3 +1,9 @@
+$("#query").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#search").click();
+    }
+});
+
 $("#search").click(function () {
     if(document.getElementById("query").value === '') {return}
     document.getElementById("genre").innerHTML = '';
