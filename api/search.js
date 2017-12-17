@@ -41,7 +41,6 @@ module.exports = {
 
             var promise = new Promise(function(resolve, reject) {
                 dbpedia.sparqlRequest(checkVGreq, function(err, response, body) {
-                    console.log(JSON.stringify(body));
                     isVideoGame = false;
                     try {
                         isVideoGame = body.boolean;
