@@ -65,6 +65,9 @@ $("#search").click(function () {
                 document.getElementById("similaires").appendChild(game)
             });
             
+            var array = data.videoGameURI.split('/')
+            document.getElementById("name").innerHTML = '<a href="' + data.videoGameURI + '">' + array[array.length -1].replace(/_/g, ' ') + '</a>'
+            
         })
         .fail(function () {
             alert('Une erreur est survenue, vérifiez que vous recherchez bien un jeu vidéo.');
