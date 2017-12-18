@@ -119,5 +119,45 @@ module.exports = {
             ?similaire genre: <" + genre + ">.\
             FILTER(?similaire != currentGame:).\
         }";
+    },
+
+    reqDevNombreEmploye: function(developer){
+        return "PREFIX employe: <http://dbpedia.org/ontology/numberOfEmployees>\n\
+        SELECT * WHERE\
+        {\
+            <" + developer + "> employe: ?numberEmploye\
+        }";
+    },
+
+    reqDevParentCompany: function(developer){
+        return "PREFIX parent: <http://dbpedia.org/ontology/parentCompany>\n\
+        SELECT * WHERE\
+        {\
+            <" + developer + "> parent: ?parentCompany\
+        }";
+    },
+
+    reqDevKeyPerson: function(developer){
+        return "PREFIX person: <http://dbpedia.org/ontology/keyPerson>\n\
+        SELECT * WHERE\
+        {\
+            <" + developer + "> person: ?keyPerson\
+        }"
+    },
+
+    reqDevFoundingYear: function(developer){
+        return "PREFIX year: <http://dbpedia.org/ontology/foundingYear>\n\
+        SELECT * WHERE\
+        {\
+            <" + developer + "> year: ?foundingYear\
+        }"
+    },
+
+    reqDevFounded: function(developer){
+        return "PREFIX founded: <http://dbpedia.org/property/founded>\n\
+        SELECT * WHERE\
+        {\
+            <" + developer + "> founded: ?founded\
+        }"
     }
 }

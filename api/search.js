@@ -103,10 +103,31 @@ module.exports = {
 
             Promise.all(promises)
                 .then(afterGameRequests)
-                .then(afterSparqlRequest)
+                
         }
 
         function afterGameRequests(videoGameURI) {
+            var promisesDev = new Array();
+            var requestsDev = new Array();
+            results2 = convertJSON(results)
+            requestsDev.push(sparql.reqDevNombreEmploye(results2.developer[0].value));   
+            requestsDev.push(sparql.reqDevParentCompany(results2.developer[0].value));    
+            requestsDev.push(sparql.reqDevKeyPerson(results2.developer[0].value));    
+            requestsDev.push(sparql.reqDevFoundingYear(results2.developer[0].value));
+            requestsDev.push(sparql.reqDevFounded(results2.developer[0].value));
+
+            requestsDev.forEach(function(element) {
+                promisesDev.push(new Promise(function(resolve, reject) {
+                    dbpedia.sparqlRequest(element, function(err, response, body) {
+                        results.push(body)
+                        resolve(videoGameURI)
+                    })
+                }))
+            })
+            Promise.all(promisesDev).then(afterDevRequests).then(afterSparqlRequest);
+        }
+
+        function afterDevRequests(videoGameURI) {
             return(new Promise(function(resolve, reject) {
                 results = convertJSON(results)
                 results.videoGameURI = videoGameURI[0];

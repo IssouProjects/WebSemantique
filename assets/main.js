@@ -16,6 +16,12 @@ $("#search").click(function () {
     document.getElementById("platform").innerHTML = '';
     document.getElementById("description").innerHTML = '';
 
+    document.getElementById("foundingYear").innerHTML = '';
+    document.getElementById("numberEmploye").innerHTML = '';
+    document.getElementById("parentCompany").innerHTML = '';
+    document.getElementById("keyPerson").innerHTML = '';
+    document.getElementById("founded").innerHTML = '';
+
     document.getElementById("similaires").innerHTML = '';
 
     document.getElementById("search").className = "btn btn-info"
@@ -30,7 +36,8 @@ $("#search").click(function () {
         dataType: 'json'
     })
         .done(function (data) {
-
+            document.getElementById("search").className = "btn btn-primary"
+            document.getElementById("search").disabled = false
             for (var key in data) {
                 if (data.hasOwnProperty(key)) {
                     for(i=0; i< data[key].length; ++i){ 
@@ -70,10 +77,10 @@ $("#search").click(function () {
             
         })
         .fail(function () {
+            document.getElementById("search").className = "btn btn-primary"
+            document.getElementById("search").disabled = false
             alert('Une erreur est survenue, vérifiez que vous recherchez bien un jeu vidéo.');
         })
         .always(function (data) {
-            document.getElementById("search").className = "btn btn-primary"
-            document.getElementById("search").disabled = false
         });
 });
